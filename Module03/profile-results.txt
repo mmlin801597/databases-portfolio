@@ -1,0 +1,26 @@
+Module03 Query Profiling Results
+
+Query:
+SELECT status, COUNT(*) AS order_count
+FROM orders
+WHERE ordered_on >= '2025-06-01'
+GROUP BY status;
+
+Before index:
+Query plan: SCAN orders
+Execution time: approximately 0.016–0.018 seconds
+
+After index:
+Index: idx_orders_ordered_on
+Query plan: SEARCH orders USING INDEX idx_orders_ordered_on (ordered_on>?)
+Execution time: approximately 0.014–0.015 seconds
+
+Results:
+late    8547
+open    8658
+shipped 25974
+
+Conclusion:
+The index changed the query plan from a full table scan to an index search.
+The execution time improved slightly. The improvement is small because the
+database contains only 60,000 orders.
