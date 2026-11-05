@@ -2,9 +2,9 @@
 Author: Myo Min Lin
 
 My partner are
-- Sebastian [portfolio link](https://github.com/Emannual20/databases-portfolio/tree/main)
-- Jomarie [portfolio link](https://github.com/jmanuel08/database-jomportfolio)
-- gitSanjay [portfolio link](https://github.com/yajnas-crpto/databases_portfolio_sanjay)
+- Sebastian, [portfolio link](https://github.com/Emannual20/databases-portfolio/tree/main)
+- Jomarie, [portfolio link](https://github.com/jmanuel08/database-jomportfolio)
+- Sanjay, [portfolio link](https://github.com/yajnas-crpto/databases_portfolio_sanjay)
 
 In my team for the final project, I also had the following members:
 
