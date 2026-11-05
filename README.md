@@ -2,15 +2,15 @@
 Author: Myo Min Lin
 
 My partner are
-- Sebastian, [portfolio link](https://github.com/Emannual20/databases-portfolio/tree/main)
-- Jomarie, [portfolio link](https://github.com/jmanuel08/database-jomportfolio)
-- Sanjay, [portfolio link](https://github.com/yajnas-crpto/databases_portfolio_sanjay)
+- Sebastian,  [portfolio link](https://github.com/Emannual20/databases-portfolio/tree/main)
+- Jomarie,    [portfolio link](https://github.com/jmanuel08/database-jomportfolio)
+- Sanjay,     [portfolio link](https://github.com/yajnas-crpto/databases_portfolio_sanjay)
 
 In my team for the final project, I also had the following members:
 
-- Rayan Slassi, [portfolio link](https://github.com/rayansls/Databases)
+- Rayan Slassi,     [portfolio link](https://github.com/rayansls/Databases)
 - Jonathan Behring, [portfolio link](https://github.com/Jonathan-T-B/databasesclass)
-- Aron Grudaj, [portfolio link](https://github.com/AronGrudaj/Databases-Portfolio)
+- Aron Grudaj,      [portfolio link](https://github.com/AronGrudaj/Databases-Portfolio)
 
 Our team final project repository is [here](https://github.com/somewhere/final-iot-project)
 
