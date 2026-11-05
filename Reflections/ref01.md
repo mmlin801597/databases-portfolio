@@ -41,7 +41,7 @@ There were some problems where I needed to find out why a command was not workin
 
 Working with my group was helpful during Module01. When I was stuck, I could discuss the problem with my group members and compare our approaches. This helped me understand some tasks more easily and gave me confidence to continue when I had problems.
 
-My friend **Sebastian helped me clone the template from the professor's GitHub repository** at the beginning of the project. This was especially helpful because I was still learning how GitHub and repositories worked.
+My friend Sebastian helped me clone the template from the professor's GitHub repository at the beginning of the project. This was especially helpful because I was still learning how GitHub and repositories worked.
 
 Other members of the group also helped by discussing problems, sharing ideas, and explaining things when someone was unsure about a task. I found this group interaction valuable because sometimes a problem became easier to understand after discussing it with other students.
 
@@ -59,7 +59,7 @@ I learned that getting help from the group does not mean that someone else does 
 
 Module01 was a good introduction to the way this course works. I learned not only about databases but also about working independently, documenting my process, working with my group, and verifying my results.
 
-The biggest lesson for me is that **getting an answer is not enough; I need to verify that the answer and the process are correct.**
+The biggest lesson for me is that getting an answer is not enough; I need to verify that the answer and the process are correct.
 
 I also learned that problems with tools and commands are part of the learning process. When something does not work, I should check the error, investigate the cause, and try again instead of giving up.
 
