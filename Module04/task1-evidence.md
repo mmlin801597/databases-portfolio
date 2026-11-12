@@ -11,6 +11,7 @@ The screenshots below show the results of testing the database constraints.
 - Non-existing `sensor_id` was rejected by the `FOREIGN KEY` constraint.
 - Duplicate machine/metric was rejected by the `UNIQUE` constraint.
 
+
 ## Screenshot Evidence
 
-[![Task 1 Evidence](task1%20evidence.png)](task1%20evidence.png)
+![Task 1 Evidence](task1-evidence.png)
