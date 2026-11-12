@@ -30,3 +30,7 @@ The existing reading was updated from `41.7` to `42.0`.
 - `readings.csv` — test input
 - `edge.db` — SQLite database
 - Final row count: **3**
+
+## Screenshot Evidence
+
+![Task 2 Evidence](task2-evidence.png)
