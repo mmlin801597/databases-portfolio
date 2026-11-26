@@ -1,3 +1,5 @@
 ### Embedded Database and Cloud Costs
 
-The telemetry dataset contains 172,800 readings and is stored in a local SQLite database of approximately 1.05 MB. SQLite can store and query this data without requiring a separate database server. A cloud database may introduce additional costs for storage, computing, and data transfer.
+The generated telemetry dataset contains 172,800 readings. The current local `telemetry.db` file occupies 10,526,720 bytes (about 10.04 MiB on disk); the database file includes SQLite page and index overhead, so this is not the raw CSV size. SQLite stores and queries the data in-process, without a separate database server to provision or keep running.
+
+If this database moved to a hosted service, the organization operating the application would normally pay for the database service, storage, compute, backups, and network transfer. The customer may pay indirectly through the product price or subscription. I have not priced a particular provider or workload, so this portfolio does not claim a dollar saving. The defensible comparison here is architectural: a local SQLite file avoids a separately billed database service for this local workload, while a cloud deployment can add availability, shared access, and operational features at a cost that depends on provider, region, retention, and traffic.

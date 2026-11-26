@@ -1,5 +1,19 @@
 # Module 1
 
+## Learning Goals
+
+By the end of this module, I can:
+
+1. Explain how the class works, including its challenge- and project-based approach, portfolio assessment, and moving draft boundary.
+2. Set up a personal portfolio from the course template and use a `.gitignore` that keeps databases and secrets out of Git.
+3. Set up and verify the course toolchain reproducibly with `uv`, Python, SQLite, DuckDB, Datasette, and related tools.
+4. Use a measurement to explain the difference between embedded and client/server databases, and why a local application may not need a separate server.
+5. Load real rows into SQLite and query them from Python using bound parameters.
+6. Run an LLM-generated query and verify its result and behavior before trusting it.
+
+**Planned focus:** Use the machine telemetry data to practice SQL and verify query results before relying on them.
+
+These goals follow the [official Module 1 specification](../Course_Materials/01-introduction-and-local-first.md).
 
 ## Task Inspirations
 
@@ -46,7 +60,7 @@ Challenges:
     -Power and Data Management: Many IoT devices have limited battery life and storage capacity, making efficient energy use and data processing important.
 
 ## Reflection 1
-[Reflection 1](/Reflections/ref01.md)
+[Reflection 1](../Reflections/ref01.md)
 I found .schema most useful because it shows a table's structure, including its column names and data types.
 
 ### Task 8: Publish Data with Datasette

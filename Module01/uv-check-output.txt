@@ -1,0 +1,8 @@
+uv-managed Python: C:\Users\Myo Min Lin\database-portfolio\.venv\Scripts\python.exe
+Python version:    3.14.9
+SQLite version:    3.53.1
+duckdb             2.0.0
+datasette          0.65.5
+sqlite-utils       4.2.1
+pydantic           2.14.1
+sqlalchemy         2.1.6

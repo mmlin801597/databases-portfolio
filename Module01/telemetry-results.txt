@@ -17,3 +17,14 @@ cnc-03 | 2.55
 alarm_readings
 11714
 
+Timing evidence (SQLite CLI `.timer on`; one serial pass, existing local database,
+single observation per query; timings are not a repeated benchmark):
+
+1. Number of readings per machine: real 0.054600 s
+2. Peak vibration per machine: real 0.065378 s
+3. Readings exceeding the 2.0 mm/s alarm: real 0.017102 s
+
+The queries were run sequentially in one SQLite CLI session with the database
+opened read-only. Cache state was not controlled, so these figures describe this
+run only.
+
