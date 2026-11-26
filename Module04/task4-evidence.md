@@ -1,16 +1,12 @@
-# Module04 — Task 4: Access Control Without a Server
+﻿# Module04 — Task 4: Access Control Without a Server
 
-## Access Control Evidence
+SQLite does not provide server roles and `GRANT`/`REVOKE`. A safe view can limit the columns and rows exposed by an application, while a read-only connection opened with `mode=ro` prevents writes through that connection. The `machine_health` view is included in the reproducible schema in `setup.sql`.
 
-SQLite does not have `GRANT` and `REVOKE` like PostgreSQL. Instead, access can be controlled using a safe view, file permissions, and a read-only database connection.
+Run `python Module04/access_check.py` to create a disposable database, read the view, and confirm that an insert through a read-only URI is rejected. This does not change the tracked `edge.db`.
 
-The `machine_health` view exposes only the required machine health information instead of giving report readers direct access to all tables.
+A read-only connection does not replace operating-system file permissions. SQLite file access is not per-user database authorization, so a multi-tenant service should keep the database file behind a trusted application or use a server database with roles.
 
-With PostgreSQL, access control is managed by the database server using users, roles, and privileges such as `GRANT` and `REVOKE`. PostgreSQL is better suited for a multi-tenant web application because different users can have different database permissions while the database server controls access. File-permission-based control is acceptable for a local SQLite application because the database is a local file, but it is not sufficient for a multi-tenant web app because users must not be able to access or modify the database file directly.
+## Personal evidence still needed
 
-## Evidence
-
-- `machine_health` view created successfully.
-- Read-only connection successfully returned **10,004** readings.
-- Write attempt using `mode=ro` failed with `attempt to write a readonly database`.
-- File write access was restored afterward.
+- [ ] If the coursework requires a file-permission experiment, add a screenshot or terminal transcript from your own OS showing the permission change and restoration. The current repository does not preserve evidence that this was actually performed.
+- [ ] The tracked `edge.db` currently contains 10,005 readings. Earlier draft evidence said 10,004; that saved count is inconsistent with the current file and should not be treated as the reproducible setup result.

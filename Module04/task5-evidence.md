@@ -1,11 +1,8 @@
-# Module04 — Task 5: Break Your Own Alarm
+﻿# Module04 — Task 5: Break Your Own Alarm
 
-## BEFORE INSERT Experiment
+`task5.sql` is a reproducible experiment to run after `setup.sql` in a fresh SQLite database. It replaces the normal `AFTER INSERT` alarm trigger with a `BEFORE INSERT` trigger, inserts a vibration reading at 3.5 mm/s, then displays the stored reading and alarm.
 
-I changed the vibration alarm trigger from `AFTER INSERT` to `BEFORE INSERT`.
+The alarm table records sensor, time, value, and reason; it does not require a foreign key to a reading row. That is why this simple side effect can be produced before the reading is stored. In a real design, decide whether an alarm should reference a reading identifier; a `BEFORE INSERT` trigger cannot refer to a row ID that has not yet been persisted. The normal `AFTER INSERT` trigger is clearer when the alarm represents a successfully stored reading.
 
-I inserted a vibration reading with a value of **3.5 mm/s**. The alarm trigger created an alarm successfully.
-
-The main difference is the timing. With `BEFORE INSERT`, the trigger runs before the new reading is completed, while `AFTER INSERT` runs after the reading has been inserted.
-
-For this alarm, `AFTER INSERT` is the better default because the alarm is a consequence of a reading that has already been successfully stored. It also makes the trigger easier to understand: first save the measurement, then create the alarm based on that stored measurement.
+## Screenshot Evidence
+![Task 5 Evidence](task5-evidence.png)

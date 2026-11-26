@@ -1,18 +1,20 @@
-## Trigger Cost Measurement
+﻿# Module04 — Task 3: Trigger Cost Measurement
 
-I measured the time required to ingest 10,000 readings with and without the vibration alarm trigger.
+## Method
 
-| Configuration | Time for 10,000 rows |
-|---|---:|
-| Without alarm trigger | 19.97 ms |
-| With alarm trigger | 38.56 ms |
+`benchmark_triggers.py` creates a fresh in-memory database from `setup.sql` for each sample. It inserts 10,000 valid vibration readings with and without `trg_vib_alarm`, alternates configuration order over five paired runs, and reports medians. The existing `edge.db` is never opened or changed.
 
-The alarm trigger increased the measured ingestion time by about 18.59 ms.
+## Measured results
 
-This shows that triggers add some write overhead because SQLite performs the additional trigger action for each matching row.
+| Configuration | Runs (ms) | Median (ms) | Alarm rows |
+|---|---|---:|---:|
+| Without trigger | 12.041, 12.320, 14.011, 11.726, 12.083 | 12.083 | 0 |
+| With trigger | 31.971, 31.615, 31.506, 38.529, 31.078 | 31.615 | 10,000 |
 
+In this run the trigger added about **19.532 ms** to the median batch time. It correctly created one alarm for each above-threshold vibration row. This is a local measurement, not a general performance guarantee.
+
+Reproduce with `python Module04/benchmark_triggers.py` from the repository root.
 
 ## Screenshot Evidence
 
-![Task 3 Trigger Evidence](task3-triggers.png)
-
+`task3-triggers.png` is a separate visual demonstration of trigger behavior; these timings are from the reproducible script above.
