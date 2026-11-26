@@ -75,6 +75,20 @@ The database contains:
 - **Jobs using multiple parts:** Job 1 uses P-1001 and P-1002, so at least one job has multiple parts.
 - **Invalid machine reference:** Job 3 refers to cnc-05, which is not present in the machine table.
 
+### Query evidence
+
+The counts below were checked from the four-row fixture in `legacy-schema.sql`:
+
+```sql
+SELECT machine_name, COUNT(*) AS jobs FROM maint_job GROUP BY machine_name;
+SELECT technician, COUNT(*) AS jobs FROM maint_job GROUP BY technician;
+SELECT COUNT(*) AS orphan_jobs FROM maint_job m LEFT JOIN machine x
+  ON x.machine_name=m.machine_name WHERE x.machine_name IS NULL;
+SELECT part_no, COUNT(*) AS copies FROM part GROUP BY part_no;
+```
+
+Observed grouped counts: `cnc-01=2`, `cnc-02=1`, `cnc-05=1`; `Beier=2`, `Klaas=1`, `Werther=1`; one orphan job; `P-1001=1`, `P-1002=1`, `P-1003=2`. `cnc-05` is the invalid reference, and the duplicated part identifier is `P-1003`.
+
 ## 4. Relationship Types
 
 - **1:1:** No clear one-to-one relationship is represented by the current data or schema.

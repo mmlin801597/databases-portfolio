@@ -16,6 +16,12 @@ SELECT part_no, unit_price
 FROM part
 WHERE unit_price < '15';
 
+-- Supplemental comparison: cast explicitly to numeric to avoid text ordering.
+SELECT DISTINCT part_no, unit_price
+FROM part
+WHERE CAST(unit_price AS NUMERIC) < 15
+ORDER BY part_no;
+
 -- Defect 4: Invalid installed dates
 SELECT machine_name, installed
 FROM machine

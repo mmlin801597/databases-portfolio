@@ -1,26 +1,16 @@
-# Module 2
+﻿# Module 2 — Reconstruct and Repair a Database
 
-We are going to show here notes for Task 1, 2, 3, 4, and 5 to prove
+This folder documents the legacy maintenance database, its defects, and a code-first repaired contract.
 
-## Task ...
+## Evidence
 
-This task was executed by myself.
+- [Legacy schema and sample rows](legacy-schema.sql)
+- [ER reconstruction and observed cardinalities](er-audit.md)
+- [Defect queries](defect-queries.sql) and [captured output](defect-results.txt)
+- [Defect interpretation](defect-audit.md)
+- [Pydantic and SQLAlchemy contract](contract.py), [generated DDL](contract-ddl.sql), and [constraint notes](contract-notes.md)
+- [Inheritance mapping decision](inheritance-decision.md), [single-table SQL](inheritance-single-table.sql), and [separate-table SQL](inheritance-separate-tables.sql)
+- [Mermaid modeling exercise](mermaid-lab.md)
+- [Personal reflection](../Reflections/ref02.md)
 
-## Task ...
-
-This task was executed by my partner. The implementation was about ... 
-It is [here](https://github.com/partner/iot-portfolio/Module02/Readme.md#task-2).
-
-## Reflection 2
-[Reflection 2](/Reflections/ref02.md)
-
-## Task ...
-
-...
-
-If the module is longer than 1 week, you might have several reflections within it. If not, delete this and the following.
-
-## Reflection 3
-[Reflection 3](/Reflections/ref03.md)
-
-
+The DDL is emitted by running `python Module02/contract.py`. Queries and captured results use the small fixture in `legacy-schema.sql`. Team or partner contributions are not asserted here; add those only from your own records.

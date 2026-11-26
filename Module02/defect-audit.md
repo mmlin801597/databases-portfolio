@@ -11,9 +11,9 @@
 **Production impact:** Duplicate part records can lead to incorrect inventory counts and purchasing reports.
 
 ## Defect 3: Prices stored as text
-**Evidence:** The price query returns only `P-1001` with price `12.50`.
+**Evidence:** The query compares text values with `'15'`, so SQLite compares them lexically. It returns `P-1001` (`12.50`) but misses `P-1003` (`9.90`): the first character `'9'` sorts after `'1'`, even though 9.90 is numerically less than 15. A numeric cast returns both distinct parts below 15. The duplicate `P-1003` rows are a separate defect.
 
-**Production impact:** Text-based price comparisons can produce incorrect financial reports.
+**Production impact:** Text-based price comparisons can omit valid low-priced parts from financial reports. Store prices as a numeric type and compare numeric values.
 
 ## Defect 4: Invalid installation date
 **Evidence:** Machine `RANDOM-NAME` has the installation date `unknown`.
