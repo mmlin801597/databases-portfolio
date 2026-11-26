@@ -31,3 +31,8 @@ WHERE o.ordered_on >= '2025-01-01'
   AND o.ordered_on < '2026-01-01'
 GROUP BY c.city
 ORDER BY revenue DESC;
+```
+
+## Plan prediction versus observation
+
+The prediction expected SQLite to scan `customer`, search orders by customer, and search order lines by order. The captured plan instead scanned `order_line` first, then searched `orders`, `customer`, and `product` using integer primary keys. It used temporary B-trees for grouping, `COUNT(DISTINCT)`, and ordering. The execution engine chose a line-first join order; the plan evidence is `task1-plan-output.txt`.

@@ -1,92 +1,20 @@
-# Module03 Task 2 — Index Benchmark
+﻿# Module 3 — Reproducible Index Benchmark
 
-## Baseline — No Additional Indexes
+## Method
 
-### Dashboard Query
+`bench.py` creates four fresh databases from `setup.sql`, adds at most one index to each comparison database, then measures the dashboard aggregate five times per variant in interleaved order. Each timed query fetches all result rows. The script reports the median and `EXPLAIN QUERY PLAN`; it does not touch `warehouse.db`. Values below are one run on this machine, so they are observations rather than portable performance guarantees.
 
-Runs:
+## Measured results
 
-- 102.631 ms
-- 96.950 ms
-- 96.296 ms
+| Variant | Runs (ms) | Median (ms) | Plan uses added index? |
+|---|---|---:|---|
+| Baseline | 122.201, 103.376, 107.483, 102.458, 108.534 | 107.483 | No |
+| `ix_orders_ordered_on` | 157.430, 111.307, 104.429, 102.336, 104.418 | 104.429 | No |
+| `ix_orderline_product` | 130.276, 126.121, 107.507, 104.000, 104.029 | 107.507 | No |
+| `ix_orderline_order` | 122.495, 103.756, 104.222, 102.311, 102.622 | 103.756 | No |
 
-Median: **96.950 ms**
+All four plans scanned `ol`, searched `orders`, `customer`, and `product` by their integer primary keys, and used temporary B-trees for grouping, `COUNT(DISTINCT)`, and ordering. The added indexes did not change this plan. The small timing differences and slower first samples show variation in this short local benchmark; the measurements do not support claiming a meaningful speedup or slowdown.
 
-### Single-Day Query
+## Reproduction
 
-Runs:
-
-- 0.701 ms
-- 0.136 ms
-- 0.106 ms
-
-Median: **0.136 ms**
-
-The first run was slower because the database file was being loaded into the cache. Therefore, the median is used for comparison.
-
-## Single-Day Lookup
-
-### Before `ix_orders_ordered_on`
-
-Plan:
-
-```text
-|--SCAN o
-`--SEARCH c USING INTEGER PRIMARY KEY (rowid=?)
-```
-
-Median: **2.459 ms**
-
-### After `ix_orders_ordered_on`
-
-Runs:
-
-- 0.753 ms
-- 0.208 ms
-- 0.198 ms
-
-Median: **0.208 ms**
-
-Plan:
-
-```text
-|--SEARCH o USING INDEX ix_orders_ordered_on (ordered_on=?)
-`--SEARCH c USING INTEGER PRIMARY KEY (rowid=?)
-```
-
-The index reduced the median execution time from **2.459 ms to 0.208 ms**, showing a strong improvement for the selective single-day lookup.
-
-## Index Usefulness — `ix_orderline_product`
-
-For the dashboard query, `ix_orderline_product` was not useful because SQLite reaches the `product` table using the product primary key.
-
-However, a query that directly filters `order_line.product_id` uses the index.
-
-### Before the Index
-
-```text
-SCAN order_line
-```
-
-### After the Index
-
-```text
-SEARCH order_line USING INDEX ix_orderline_product (product_id=?)
-```
-
-This proves that `ix_orderline_product` is useful for queries that directly filter `order_line.product_id`. However, it does not help the dashboard query because the dashboard reaches the product table through its primary key.
-
-## Final Summary
-
-| Test | Result | Conclusion |
-|---|---|---|
-| Baseline dashboard | Median 96.950 ms | Full scan of `order_line` |
-| `ix_orders_ordered_on` | Dashboard median 86.266 ms; plan unchanged | Small timing improvement, but SQLite did not use the index for the dashboard |
-| `ix_orderline_order` | Dashboard became much slower | Index changed the plan but hurt performance |
-| `ix_orderline_product` | Dashboard did not use it | Not useful for this dashboard query |
-| Single-day lookup | 2.459 ms → 0.208 ms | Strong improvement for selective date lookup |
-| Direct `product_id` filter | `SCAN order_line` → `SEARCH order_line USING INDEX` | Useful for this specific query |
-
-## Conclusion
-
-The benchmark shows that indexes do not automatically make every query faster. Their usefulness depends on the query and the amount of data being searched. The single-day lookup clearly benefited from `ix_orders_ordered_on`, reducing the median execution time from **2.459 ms to 0.208 ms**. In contrast, the aggregate dashboard query remained expensive and became much slower with `ix_orderline_order`. The `ix_orderline_product` index was not useful for the dashboard, but it was useful for a query that directly filtered `order_line.product_id`.
+Run `python Module03/bench.py` from the repository root. The script prints the measured values and plans. These results came from the successful run after correcting the fixture's damaged city-name characters.
